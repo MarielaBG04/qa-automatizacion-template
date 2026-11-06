@@ -5,7 +5,7 @@ public class TC001CondicionalesEnJava {
 //Declarar variables
 String nombre= "Mariela";   
 int edad =26;
-boolean estudiante=false;
+boolean estudiante=true;
 
 //Mostrar variables en consola
 System.out.println("====DATOS VARIABLES====");
