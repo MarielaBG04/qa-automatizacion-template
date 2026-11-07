@@ -1,4 +1,4 @@
 setup\BaseTestPruebas.class
+setup\Environment.class
 setup\Utils.class
 examples\LoginTest.class
-setup\Environment.class

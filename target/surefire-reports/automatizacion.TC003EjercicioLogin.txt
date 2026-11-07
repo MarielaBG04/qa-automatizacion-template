@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: automatizacion.TC003EjercicioLogin
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.526 s -- in automatizacion.TC003EjercicioLogin
