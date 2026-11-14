@@ -1,7 +1,6 @@
 package automatizacion;
 
 import java.time.Duration;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class EX001ComprarUserAutenticado {
@@ -85,7 +83,7 @@ public class EX001ComprarUserAutenticado {
       .get(0)
       .click();
 
-      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
 WebElement btnAddToCart = wait.until(
     ExpectedConditions.elementToBeClickable(
@@ -113,6 +111,7 @@ btnFinalizar.click();
 
 // Confirmar Informacion
 
+
 WebElement btnContinueAddress = wait.until(
     ExpectedConditions.elementToBeClickable(
         By.name("confirm-addresses")
@@ -120,6 +119,7 @@ WebElement btnContinueAddress = wait.until(
 );
 
 btnContinueAddress.click();
+driver.findElement(By.id("delivery_message")).sendKeys("Prueba123");
 
 
 
@@ -128,26 +128,34 @@ WebElement btnContinueShipping = wait.until(
         By.name("confirmDeliveryOption")
     )
 );
-
-WebElement paymentMethod = wait.until(
-    ExpectedConditions.elementToBeClickable(
-        By.id("payment-option-1")
-    )
-);
-
-paymentMethod.click();
-
-WebElement chkTerms = wait.until(
-    ExpectedConditions.elementToBeClickable(
-        By.id("conditions_to_approve[terms-and-conditions]")
-    )
-);
-
-chkTerms.click();
-
 btnContinueShipping.click();
 
-    }  
+driver.findElement(By.id("payment-option-1")).click();
+driver.findElement(By.id("conditions_to_approve[terms-and-conditions]")).click();
 
-    
+WebElement btnPlaceOrder = wait.until(
+    ExpectedConditions.elementToBeClickable(
+        By.cssSelector(".btn.btn-primary.center-block")
+    )
+);
+
+btnPlaceOrder.click();
+
+String texto = wait.until(
+    ExpectedConditions.visibilityOfElementLocated(
+        By.cssSelector(".card-title")
+    )
+).getText();
+
+Assertions.assertTrue(texto.contains("ORDER"));
+
+
+    }  
+         //Acciones que se ejecutan después de cada test
+    @AfterEach 
+    public void cerrarSesion(){
+        driver.quit();
+    }
+
+
 }
